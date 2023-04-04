@@ -93,12 +93,20 @@ lectureCat().then(retour => {
   
   
 
-  var modal1 = document.getElementById("modal1");
+  var modal1 = document.getElementById("a-modal1");
+  var modal2 = document.getElementById("a-modal2");
+  var modal3 = document.getElementById("a-modal3");
   var modal = document.getElementById("modal-gallery");
 
   modal1.addEventListener("click", function() {
      modal.style.display = "block";
   });
+  modal2.addEventListener("click", function() {
+    modal.style.display = "block";
+ });
+ modal3.addEventListener("click", function() {
+  modal.style.display = "block";
+});
 
 }
 )
@@ -165,7 +173,7 @@ lectureCat().then(retour => {
     
     
     let chemin = "<div class='pre_header'>";
-    chemin += "<a href=# id=modal1 ><i class='fa-regular fa-pen-to-square'  ><p>Mode Edition</p></i></a>";
+    chemin += "<a href=# id=a-modal1 ><i class='fa-regular fa-pen-to-square'  ><p>Mode Edition</p></i></a>";
     chemin+="<button class=btn_header><a href=#> Publier les changements</a></button>";
     chemin+="</div>";
     $('header').append(chemin);
@@ -173,13 +181,13 @@ lectureCat().then(retour => {
 
    
 
-    let chemin2 = "<a href=# id=modal1 ><i class='fa-regular fa-pen-to-square' ><p>Mode Edition</p></i></a>";
+    let chemin2 = "<a href=# id=a-modal2 ><i class='fa-regular fa-pen-to-square' ><p>Modifier</p></i></a>";
     chemin2+= "</div>";
     $('#introduction figure').append(chemin2)
 
     
 
-   let chemin3="<a href=# id=modal1 ><i class='fa-regular fa-pen-to-square' ><p>Mode Edition</p></i></a>";
+   let chemin3="<a href=# id=a-modal3 ><i class='fa-regular fa-pen-to-square' ><p>Modifier</p></i></a>";
     $('#portfolio h2').append(chemin3);
 
     
@@ -289,7 +297,7 @@ lectureCat().then(retour => {
     
     for(const image of magallerie)
     {
-        let chemin ="<figure><div class= trash ><img src="+ image.imageUrl + " alt="+ image.title +"> <a href=#><i class='fa-solid fa-trash-can'></i></a></div><figcaption>éditer</figacption></figure>"
+        let chemin ="<figure><img src="+ image.imageUrl + " alt="+ image.title +"> <div class=i-font><div class= multi-cross><i class='fa-solid fa-arrows-up-down-left-right' ></i></div> <div class= trash ><a href=#><i class='fa-solid fa-trash-can'></i></a></div></div><figcaption>éditer</figacption></figure>"
         
         $(".gallery-modal").append(chemin);
         }
@@ -305,7 +313,8 @@ lectureCat().then(retour => {
  function afficheModalpage2(){
   let chemin="<div class=modal2><button id= arrow11><a href=#><i id=arrow class='fa-solid fa-arrow-left'></i></a></button><a href=#><i id=cross class='fa-solid fa-xmark'></a></i>";
   chemin+="<div class=modal2-content><h3>Ajout photo</h3><div class=add-img><i class='fa-solid fa-image'></i><button class= btn-modal2>+ Ajouter photo</button><p>jpg, png: 4mo max</p></div>";
-  chemin+="<form><label for= title>Titre</label><input type=text id=title></input><label for= categrories>Categorie</label><input type=text id= categories></input></form>"
+  chemin+="<form><label for= title>Titre</label><input type=text id=title></input><label for= categories>Catégorie</label><select name=categories id=categories>";
+  chemin+="<option value= ></option><option value=Objets>Objets</option><option value=Appart>Appartements</option><option value=Hotels>Hôtels & Restaurants</option></select></form>"
   chemin+="<button class=Valid>Valider</button</div></div>";
 
 

@@ -1,0 +1,24 @@
+			TO DO LIST PROJET 6:
+
+
+
+- Rendre tous les <a href=# id=modal1 > fonctionnel, pour l'instant seulment 1/3 fonctionne // DONE
+
+- Fontawesome logo croix multidirectionelle lorsque hover sur les images // DONE
+
+-Dans la modale2 dans le form il faut changer le type de l'input categorie (cf memo cours css/html) et donc ajouter les catégories presentes sur l'API // DONE
+
+
+
+
+
+
+-Los de l'affichage de la modale il arrive souvent que mes images ne soient pas chargées 
+
+-Quand j'arrive sur la modale2 et que je quitte la modale il faut que celle ci se ferme complétement et quand je decide de la réouvrir commence avec la modale-gallery en tant que 1ere page
+
+- Lors du chargement de la page s'assurer que j'arrive sur la page avec les filtres et non pas celle avec la modale
+
+-Créer le chemin permettant de supprimer un projet
+
+-Créer le chemin permettant d'ajouter un projet
