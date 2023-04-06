@@ -4,6 +4,7 @@ const categories = new Set();
 const objetSet = new Set();
 const appartSet = new Set();
 const hotelSet = new Set();
+const imageAsupprimer = new Set();
 
 
 
@@ -74,14 +75,14 @@ lectureCat().then(retour => {
   retour.forEach(categorie => {
     categories.add(categorie);
   });
-  if (localStorage.getItem('administrateur')== undefined){
+  if (sessionStorage.getItem('administrateur')== undefined){
   afficheFiltre(categories);
   evenement(categories);
   let bouton = document.getElementById("cat_0");      
   bouton.classList.add("filtreActif");}
   else {afficheModale(),afficheModalGallery(gallerie)};
 
-  $('.modal button').click(function() {
+  $('#add_img').click(function() {
     $('.modal-div').hide();
     afficheModalpage2();
     $('.modal2 button').click(function() {
@@ -190,7 +191,17 @@ lectureCat().then(retour => {
    let chemin3="<a href=# id=a-modal3 ><i class='fa-regular fa-pen-to-square' ><p>Modifier</p></i></a>";
     $('#portfolio h2').append(chemin3);
 
-    
+  $('header #login').empty();
+
+  
+  let chemin5 ="<li><a href=connect.html>logout</a></li>";
+  $('header nav #login').append(chemin5);
+
+  $('header nav #login').css({
+    'font-family' : 'Work Sans',
+    'font-size' : '14px',
+    'font-weight' : '400'
+  });
     
 
     $('#portfolio h2 ').css({
@@ -290,22 +301,54 @@ lectureCat().then(retour => {
    function afficheModalGallery(magallerie ){
     let chemin4="<aside id='modal-gallery' class='modal'  style=display:none >";
     chemin4+="<div class=modal-div><a href=#><i id= cross class='fa-solid fa-xmark'></i></a><h3>Galerie photo</h3><div class=gallery-modal></div>";
-    chemin4+="<button class='btn filtreActif edition'>Ajouter une photo</button>";
-    chemin4+="<a href=#>Supprimer la galerie</a></div></aside>";
+    chemin4+="<button id= add_img class='btn filtreActif edition'>Ajouter une photo</button>";
+    chemin4+="<button class= supp-img><a href=#>Supprimer la galerie</a></button></div></aside>";
     
     $('header').append(chemin4);
     
     for(const image of magallerie)
     {
-        let chemin ="<figure><img src="+ image.imageUrl + " alt="+ image.title +"> <div class=i-font><div class= multi-cross><i class='fa-solid fa-arrows-up-down-left-right' ></i></div> <div class= trash ><a href=#><i class='fa-solid fa-trash-can'></i></a></div></div><figcaption>éditer</figacption></figure>"
+      let chemin ="<figure><img src="+ image.imageUrl + " alt="+ image.title +"> <div class=i-font><div class= multi-cross><i class='fa-solid fa-arrows-up-down-left-right' ></i></div>";
+      chemin+=" <div class= trash ><a href=#><i id= img_" + image.id + " class='fa-solid fa-trash-can'></i></a></div></div><figcaption>éditer</figacption></figure>"
+      
+      $(".gallery-modal").append(chemin);
+      }
         
-        $(".gallery-modal").append(chemin);
-        }
         $('#cross').click(function(){
           $('#modal-gallery').hide();
+          $('#modal2').hide();
+
        });
-        
-    
+       
+       const trashIcons = $('.trash i');
+          trashIcons.on('click', function() {
+            $(this).css('color', 'red');
+          });
+          let isTrashIconRed = true; 
+          $('.trash i').on('click', function() {
+            $(this).toggleClass('selected');
+            const trash = document.activeElement;
+           let numero= trash.firstChild.id.substring(4);
+                        
+            if (isTrashIconRed) {
+              $(this).css('color', 'white'); 
+              } else {
+              $(this).css('color', 'red');
+           
+            }
+            isTrashIconRed = !isTrashIconRed; 
+          });  
+            
+  }
+
+  function supprimeImage(numero){
+    gallerie.forEach(image =>{
+      if (image.id == numero ){
+        //procedure de supression 
+        //procedure de supression du set gallerie
+        //procedure de supression du set de catégorie auquelle elle appartient
+      }
+    })
   }
   
 
@@ -321,22 +364,15 @@ lectureCat().then(retour => {
   $('aside').prepend(chemin);
   $('#cross').click(function(){
     $('#modal-gallery').hide();
-    
  });
   
  }
 
- 
- 
-    
-    
 
    $(document).ready(function(){
     lectureBase();
     lectureCat();
-   
-  
-    
+ 
 })
 
 

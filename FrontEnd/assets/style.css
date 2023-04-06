@@ -287,6 +287,7 @@ footer nav ul {
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	cursor: pointer;
 }
 
 #connexion a {
@@ -412,7 +413,11 @@ footer nav ul {
 }
 
 
-
+.supp-img{
+	border: none;
+	background-color: white;
+	background: rgba(250, 250, 250, 1);
+}
 
 
 

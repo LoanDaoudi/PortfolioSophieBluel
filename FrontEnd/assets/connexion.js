@@ -32,9 +32,9 @@ document.querySelector('#form.formLogin').addEventListener("submit",function(e){
         administrateur.token = retour.token;
 
         // stock des variables pour pouvoir administrer les travaux
-        localStorage.setItem("administrateur", JSON.stringify(administrateur));
-        localStorage.setItem("utilisateur",JSON.stringify(utilisateur) );
-        localStorage.setItem("connecte",true);
+        sessionStorage.setItem("administrateur", JSON.stringify(administrateur));
+        sessionStorage.setItem("utilisateur",JSON.stringify(utilisateur) );
+        sessionStorage.setItem("connecte",true);
    
         // retour à la page d'accueil
         location.href = "./index.html";
