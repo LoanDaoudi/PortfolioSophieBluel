@@ -329,24 +329,28 @@ lectureCat().then(retour => {
             $(this).toggleClass('selected');
             const trash = document.activeElement;
            let numero= trash.firstChild.id.substring(4);
-                        
+           console.log(numero);
+                
             if (isTrashIconRed) {
               $(this).css('color', 'white'); 
               } else {
               $(this).css('color', 'red');
-           
             }
+            supprimeImage(numero);
             isTrashIconRed = !isTrashIconRed; 
           });  
             
   }
 
+
+
   function supprimeImage(numero){
-    gallerie.forEach(image =>{
+    gallerie.forEach((image, index) =>{ 
       if (image.id == numero ){
-        //procedure de supression 
-        //procedure de supression du set gallerie
-        //procedure de supression du set de catégorie auquelle elle appartient
+        gallerie.splice(index, 1);
+        categories.get(image.categorie).delete(image);
+      // suppression de l'image de l'interface utilisateur
+      $(`#image-${numero}`).remove();
       }
     })
   }
