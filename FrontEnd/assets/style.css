@@ -99,10 +99,15 @@ nav li  {
 	padding: 0 10px;
 	font-size: 1.2em;
 	text-decoration: none;
+	color: black;
 }
 
 li a{
 	text-decoration: none;
+}
+
+nav a:visited{
+	color: black;
 }
 
 li:hover {
@@ -428,7 +433,7 @@ footer nav ul {
 	justify-content: center;
 }
 
-.modal2 form{
+#add-project{
 
 	width: 420px;
 	height: 205px;
@@ -463,38 +468,56 @@ footer nav ul {
 .add-img{
 	display: flex;
 	flex-direction: column;
-	width: 420px;
-	height: 169px;
+	width: 480px;
+	height: 230px;
 	background-color:#E8F1F6;
 	align-items: center;
 	margin-bottom: 30px;
-	
 }
+
+
+
+
+.btn-modal2 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	background-color:#CBD6DC;
+	font-size: 14px;
+	font-weight: 500;
+	font-family: 'Work Sans';
+	color: #306685;
+	cursor: pointer;
+  }
+
+	.add-img form{
+		margin:auto;
+	}
+  .add-img label{
+	margin: auto;
+	display: flex;
+
+  }
 
 .add-img i{
 	margin-top: 28px;
 	margin-bottom: 21px;
 	font-size: 58px;
 	color: #B9C5CC;
+	margin: auto;
 }
 
-.btn-modal2{
-width: 173px;
-height: 36px;
-border-radius: 50px;
-background-color:#CBD6DC;
-border: none;
-font-size: 14px;
-font-weight: 500;
-font-family: 'Work Sans';
-color: #306685;
-margin-bottom: 7px;
-}
+
 
 .add-img p{
 font-size: 10px;
 font-weight: 400;
 font-family: 'Work Sans';
+margin: auto;
 }
 
 .Valid{

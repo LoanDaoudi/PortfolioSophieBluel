@@ -12,6 +12,7 @@
 
 
 
+faire un suel formulaire sur la modalepage2
 
 -Log out ===> dirige vers empty sessionstorage
 
@@ -22,3 +23,4 @@
 -Créer le chemin permettant de supprimer un projet
 
 -Créer le chemin permettant d'ajouter un projet
+
