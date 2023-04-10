@@ -144,6 +144,11 @@ lectureCat().then(retour => {
   }
   }
 
+  function logout() {
+    sessionStorage.clear();
+    afficheModale().hide;
+    
+  }
 
    function afficheModale(){
     let chemin = "<div class='pre_header'>";
@@ -161,8 +166,13 @@ lectureCat().then(retour => {
     $('#portfolio h2').append(chemin3);
 
     $('header #login').empty();
-   let chemin5 ="<li><a href=connect.html>logout</a></li>";
+   let chemin5 ="<li><a href=> logout</a></li>";
   $('header nav #login').append(chemin5);
+
+  $('header nav #login li:last-child a').on('click', function() {
+    logout(); // Appeler la fonction logout()
+  });
+
 
   $('header nav #login').css({
     'font-family' : 'Work Sans',
@@ -373,7 +383,8 @@ function afficheModalpage2(){
     });
     
 }
-  
+
+
 /*function ajouterImage() {
   // récupérer les valeurs des champs du formulaire
   let titre = $('#add-project #title').val();
