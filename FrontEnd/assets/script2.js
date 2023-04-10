@@ -1,4 +1,3 @@
-
 //déclaration des 
 const gallerie = new Set();
 const categories = new Set();
@@ -61,24 +60,26 @@ lectureCat().then(retour => {
     categories.add(categorie);
   });
   if (sessionStorage.getItem('administrateur')== undefined){
-  afficheFiltre(categories);
-  evenement(categories);
-  let bouton = document.getElementById("cat_0");      
-  bouton.classList.add("filtreActif");}
- 
-  
-  else {afficheModale(),afficheModalGallery(gallerie)};
-  $('#cross').click(function(){
-    cacheModale()
-});
-  $('#add_img').click(function() {
-    $('.modal-div').hide();
-    afficheModalpage2();
-    $('#arrow11').click(function() {
-      $('.modal2').hide();
-      $('.modal-div').show();
+     afficheFiltre(categories);
+     evenement(categories);
+     let bouton = document.getElementById("cat_0");      
+     bouton.classList.add("filtreActif");
+  } else { 
+     afficheModale();
+     afficheModalGallery(gallerie)
+/*     $('#cross').click(function(){
+      cacheModale();
+     });
+*/     
+      $('#add_img').click(function() {
+      $('.modal-div').hide();
+      afficheModalpage2();
+      $('#arrow11').click(function() {
+        $('.modal2').hide();
+        $('.modal-div').show();
+      });
     });
-  });
+  }
 
   var modal1 = document.getElementById("a-modal1");
   var modal2 = document.getElementById("a-modal2");
@@ -286,7 +287,12 @@ lectureCat().then(retour => {
     // initialisation du Set() imagesAsupprimer
     imageAsupprimer.clear();
     
-    
+    $('#cross').click(function(){
+      $('#modal2').hide();
+      $('.modal-div').show();
+      $('#modal-gallery').hide();
+    });
+
        
      // gestion des icones Trash 
      // on gere le Set() imagesAsupprimer 
@@ -315,17 +321,18 @@ lectureCat().then(retour => {
             
   }
 
+
   function cacheModale(){
     $('#modal2').hide();
-    $('gallery-modal').show();
+    $(".modal2").hide();
+    $('.modal-div').show();
     $('#modal-gallery').hide();
   }
- 
-  
+   
 
 function afficheModalpage2(){
     let chemin="<div class=modal2><button id= arrow11><a href=#><i id=arrow class='fa-solid fa-arrow-left'>";
-    chemin+="</i></a></button><a href=#><i id=cross class='fa-solid fa-xmark'></a></i>";
+    chemin+="</i></a></button><a href=#><i id=cross2 class='fa-solid fa-xmark'></i></a>";
     chemin+="<div class=modal2-content><h3>Ajout photo</h3><div class=add-img><i class='fa-solid fa-image'>";
     chemin+="</i><form id=add-picture><label class=btn-modal2><input type='file' style= display:none accept= .png, .jpg >";
     chemin+="+ Ajouter photo</label></form><p>jpg, png: 4mo max</p></div>";
@@ -337,6 +344,7 @@ function afficheModalpage2(){
   
     
      $('aside').prepend(chemin);
+
      $('#add-picture input').on('change', function() {
       var input = $(this)[0];
       if (input.files && input.files[0]) {
@@ -356,7 +364,7 @@ function afficheModalpage2(){
       }
     });
 
-     $('#cross').click(function(){
+     $('#cross2').click(function(){
       //$('#modal-gallery').hide();
       cacheModale();
       
@@ -371,13 +379,11 @@ function afficheModalpage2(){
   let titre = $('#add-project #title').val();
   let categorie = $('#add-project #categories').val();
   let image = $('#add-picture input')[0].files[0];
-
   // créer un objet FormData pour envoyer les données via POST
   let formData = new FormData();
   /*formData.append('titre', titre);
   formData.append('categorie', categorie);
   formData.append('image', image);
-
   // envoyer la requête POST vers votre API
   $.ajax({
     url: 'http://localhost:5678/api/works',
@@ -440,26 +446,21 @@ function deleteImage(image) {
   // Récupérer les éléments des deux formulaires
   var formulaire1 = document.getElementById(idFormulaire1);
   var formulaire2 = document.getElementById(idFormulaire2);
-
   // Récupérer les valeurs des champs des deux formulaires
   var champ1Formulaire1 = formulaire1.elements["champ1Formulaire1"].value;
   var champ2Formulaire1 = formulaire1.elements["champ2Formulaire1"].value;
   var champ3Formulaire1 = formulaire1.elements["champ3Formulaire1"].value;
-
   var champ1Formulaire2 = formulaire2.elements["champ1Formulaire2"].value;
   var champ2Formulaire2 = formulaire2.elements["champ2Formulaire2"].value;
   var champ3Formulaire2 = formulaire2.elements["champ3Formulaire2"].value;
-
   // Faire quelque chose avec les données récupérées
   console.log("Champ 1 du formulaire 1 : " + champ1Formulaire1);
   console.log("Champ 2 du formulaire 1 : " + champ2Formulaire1);
   console.log("Champ 3 du formulaire 1 : " + champ3Formulaire1);
-
   console.log("Champ 1 du formulaire 2 : " + champ1Formulaire2);
   console.log("Champ 2 du formulaire 2 : " + champ2Formulaire2);
   console.log("Champ 3 du formulaire 2 : " + champ3Formulaire2);
 }
-
 recupererDonneesDeuxFormulaires("add-image", "add-content");*/
 
 
@@ -468,5 +469,8 @@ $(document).ready(function(){
     lectureCat();
  
    })
+
+
+
 
 
