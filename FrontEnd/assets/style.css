@@ -227,6 +227,21 @@ input[type="submit"]{
 	background-color: #1D6154;
 
  }
+ 
+ .Valid{
+	margin-top: 42px;
+	width: 237px;
+	height: 36px;
+	border-radius: 60px;
+	border: none;
+	font-size: 14px;
+	font-weight:700; 
+	font-family:'Work Sans' ;
+	color: white;
+}
+ .inactif{
+	background-color: #A7A7A7;
+ }
 
 footer nav ul {
 	display: flex;
@@ -520,18 +535,7 @@ font-family: 'Work Sans';
 margin: auto;
 }
 
-.Valid{
-	margin-top: 42px;
-	width: 237px;
-	height: 36px;
-	border-radius: 60px;
-	border: none;
-	background-color: #A7A7A7;
-	font-size: 14px;
-	font-weight:700; 
-	font-family:'Work Sans' ;
-	color: white;
-}
+
 
 #arrow11{
 	background-color: white;

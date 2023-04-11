@@ -1,57 +1,57 @@
-//déclaration des 
+//déclaration des variables 
 const gallerie = new Set();
 const categories = new Set();
 const objetSet = new Set();
 const appartSet = new Set();
 const hotelSet = new Set();
 const imageAsupprimer = new Set();
-
+let fichierImage=false;
 
 
 
 //déclaration de la fonction asynchrone permettant de récuperer le tableau des projets sur l'API
 async function lectureBase () {
-    try{
+  try{
    const response = await fetch ('http://localhost:5678/api/works');
    if (response.ok) {
     const data = await response.json();
-    console.log(data);
     return data;
    }
-}
+  }
     catch (error){
         alert (error);
-    }
+  }
 }
+
 //CallBack de la function lectureBase(), et remplissage des set
 lectureBase().then(retour => {
     for (const image of retour ){
         gallerie.add(image);
-    if (image.categoryId==1){
+      if (image.categoryId==1){
         objetSet.add(image);
-    }else if  (image.categoryId==2 ) {
+      }else if  (image.categoryId==2 ) {
         appartSet.add(image);
-    } else if (image.categoryId == 3) {
+      } else if (image.categoryId == 3) {
         hotelSet.add(image);
-    }
+      }
     }
      afficheGallerie(gallerie); //Permet d'appeller la fonction afficheGallerie()
 })   
+
 //déclaration de la fonction asynchrone permettant de récuperer les catégories des projets sur l'API
 async function lectureCat () {
-try{
+  try{
     const response = await fetch ("http://localhost:5678/api/categories");
-if (response.ok) {
-    const data = await response.json();
-    console.log(data);
-    return data;
-
+    if (response.ok) {
+     const data = await response.json();
+     return data;
     }
-}
- catch (error){
+  }
+  catch (error){
     alert(error);
+  }
 }
-}
+
 //CallBack de la function lectureBase(), et remplissage des set
 lectureCat().then(retour => {
   let categorie = {id: "0", name: "Tous"};
@@ -65,36 +65,33 @@ lectureCat().then(retour => {
      let bouton = document.getElementById("cat_0");      
      bouton.classList.add("filtreActif");
   } else { 
+    // affichage Admin et modales
      afficheModale();
      afficheModalGallery(gallerie)
-/*     $('#cross').click(function(){
-      cacheModale();
-     });
-*/     
+     
       $('#add_img').click(function() {
-      $('.modal-div').hide();
-      afficheModalpage2();
-      $('#arrow11').click(function() {
-        $('.modal2').hide();
-        $('.modal-div').show();
+        $('.modal-div').hide();
+        afficheModalpage2();
+        $('#arrow11').click(function() {
+          $('.modal2').hide();
+          $('.modal-div').show();
+        });
       });
-    });
+     var modal1 = document.getElementById("a-modal1");
+     var modal2 = document.getElementById("a-modal2");
+     var modal3 = document.getElementById("a-modal3");
+     var modal = document.getElementById("modal-gallery");
+  
+     modal1.addEventListener("click", function() {
+       modal.style.display = "block";
+     });
+     modal2.addEventListener("click", function() {
+      modal.style.display = "block";
+     });
+     modal3.addEventListener("click", function() {
+      modal.style.display = "block";
+     });    
   }
-
-  var modal1 = document.getElementById("a-modal1");
-  var modal2 = document.getElementById("a-modal2");
-  var modal3 = document.getElementById("a-modal3");
-  var modal = document.getElementById("modal-gallery");
-
-  modal1.addEventListener("click", function() {
-     modal.style.display = "block";
-  });
-  modal2.addEventListener("click", function() {
-    modal.style.display = "block";
- });
- modal3.addEventListener("click", function() {
-  modal.style.display = "block";
-});
 })
 
 //Fonction qui va créer dans le code html le chemin dans lequel on implante les datas récupérés sur l'API
@@ -144,11 +141,6 @@ lectureCat().then(retour => {
   }
   }
 
-  function logout() {
-    sessionStorage.clear();
-    afficheModale().hide;
-    
-  }
 
    function afficheModale(){
     let chemin = "<div class='pre_header'>";
@@ -166,13 +158,8 @@ lectureCat().then(retour => {
     $('#portfolio h2').append(chemin3);
 
     $('header #login').empty();
-   let chemin5 ="<li><a href=> logout</a></li>";
+   let chemin5 ="<li><a href=connect.html>logout</a></li>";
   $('header nav #login').append(chemin5);
-
-  $('header nav #login li:last-child a').on('click', function() {
-    logout(); // Appeler la fonction logout()
-  });
-
 
   $('header nav #login').css({
     'font-family' : 'Work Sans',
@@ -195,7 +182,6 @@ lectureCat().then(retour => {
       'gap': '7px',
       'font-size': '14px',
       'color': 'black',
-      
       'margin-top': '10px'
     });
 
@@ -340,17 +326,28 @@ lectureCat().then(retour => {
   }
    
 
-  function afficheModalpage2(){
-    let chemin="<div class=modal2><button id= arrow11><a href=#><i id=arrow class='fa-solid fa-arrow-left'>";
-    chemin+="</i></a></button><a href=#><i id=cross2 class='fa-solid fa-xmark'></i></a>";
-    chemin+="<div class=modal2-content><h3>Ajout photo</h3><div class=add-img><i class='fa-solid fa-image'>";
-    chemin+="</i><form id=add-picture><label class=btn-modal2><input type='file' id=input-file style= display:none accept= .png, .jpg >";
-    chemin+="+ Ajouter photo</label></form><p>jpg, png: 4mo max</p></div>";
-    chemin+="<form id=add-project><label for= title>Titre</label><input type=text id=titre>";
-    chemin+="</input><label for= categories>Catégorie</label><select name=categories id=categorieChoisie>";
-    chemin+="<option value= ></option><option value=1>Objets</option><option value=2>Appartements";
-    chemin+="</option><option value=3>Hôtels & Restaurants</option></select></form>"
-    chemin+="<button id=validProjet class=Valid inactif>Valider</button</div></div>"; 
+function afficheModalpage2(){
+    let chemin="<div class=modal2><button id= arrow11><a href=#><i id=arrow class='fa-solid fa-arrow-left'>"
+    +"</i></a></button><a href=#><i id=cross2 class='fa-solid fa-xmark'></i></a>"
+    +"<div class=modal2-content>"
+    +"<h3>Ajout photo</h3>"
+    +"<form id=add-picture>"
+      +"<div class=add-img>"
+        +"<div class=placeImage></div>"
+        +" <i class='fa-solid fa-image'></i>"
+         +"<label class=btn-modal2><input type='file' name='image' id='image' style=display:none accept= .png, .jpg >"
+         +"+ Ajouter photo</label><p>jpg, png: 4mo max</p>"
+        +"</div>"
+        +"<div id=add-project>" 
+    +  "<label for=title>Titre</label><input type=text id='title' name='title'></input>"
+    +  "<label for=category>Catégorie</label>"
+    +  "<select name=category id=category>"
+        +"<option value= ></option><option value=1>Objets</option><option value=2>Appartements"
+        +"</option><option value=3>Hôtels & Restaurants</option>"
+        +"</select>"
+        +"</div>"
+   +"</form>"
+   + "<button id=validProjet class=Valid inactif>Valider</button</div></div>"; 
   
     
      $('aside').prepend(chemin);
@@ -358,13 +355,12 @@ lectureCat().then(retour => {
      var boutonValider = document.getElementById('validProjet');
      boutonValider.addEventListener('click', function() { 
         if ( !boutonValider.disable){
-          
+          ajoutImage();
         }
      });
-
-     fichierImage = '';
-     const categ = document.getElementById('categorieChoisie');
-     const titre = document.getElementById('titre');
+     fichierImage=false;
+     const categ = document.getElementById('category');
+     const titre = document.getElementById('title');
      categ.addEventListener('input', validationPhoto);
      titre.addEventListener('input', validationPhoto);
  
@@ -373,18 +369,16 @@ lectureCat().then(retour => {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
-          var img = $('<img>').attr('src', e.target.result);
+          var img = $('<img id=monimage>').attr('src', e.target.result);
           img.css({
             'object-fit': 'cover',
             'height': '230px'
           });
-          $('.add-img').html(img);
+          $('.placeImage').html(img);
           let fileName = input.files[0].name;
           fichierImage = true;
-          binaryImage=e.target.result;
           let fileNameWithoutExtension = fileName.split('.').slice(0, -1).join('.');
-          $('#add-project #titre').val(fileNameWithoutExtension);
-          titreImage=fileNameWithoutExtension;
+          $('#add-project #title').val(fileNameWithoutExtension);
         };
         reader.readAsDataURL(input.files[0]);
         validationPhoto();
@@ -400,16 +394,14 @@ function validationPhoto() {
   let bouton = document.getElementById('validProjet');
   bouton.classList.add('inactif');
   bouton.classList.remove('filtreActif');
-  categorieImage = 0;
   bouton.disabled = true;
-  let valeurs = document.getElementById('add-project');
+  let valeurs = document.getElementById('add-picture');
   if (valeurs.elements.length == 0) { 
     return false;
   }
-  let leTitre = valeurs.elements["titre"].value;
-  let laCateg = valeurs.elements["categorieChoisie"].value;
+  let leTitre = valeurs.elements["title"].value;
+  let laCateg = valeurs.elements["category"].value;
   if (fichierImage && leTitre !== '' && laCateg !== '') {
-    categorieImage = laCateg;
     bouton.disabled = false;
     bouton.classList.remove('inactif');
     bouton.classList.add('filtreActif');
@@ -418,9 +410,6 @@ function validationPhoto() {
     return false;
   }
 }
-
-
-
 
 function supprimeImage(image){
     if (imageAsupprimer.has(image)){
@@ -431,7 +420,6 @@ function supprimeImage(image){
          imageAsupprimer.delete(image);
     }
     else {
-       
     }
   }
 }
@@ -451,44 +439,44 @@ function deleteImage(image) {
       'userId': userId
     }
   })
-  .then(resultat => {
-    // on peut gerer le résultat de status    
-    console.log(resultat.status);
+  .then(response => {
+    alert(response.status);
   })
   .catch((error) => {
     alert(error)
   });
 };
 
-/*function recupererDonneesDeuxFormulaires(idFormulaire1, idFormulaire2) {
-  // Récupérer les éléments des deux formulaires
-  var formulaire1 = document.getElementById(idFormulaire1);
-  var formulaire2 = document.getElementById(idFormulaire2);
-  // Récupérer les valeurs des champs des deux formulaires
-  var champ1Formulaire1 = formulaire1.elements["champ1Formulaire1"].value;
-  var champ2Formulaire1 = formulaire1.elements["champ2Formulaire1"].value;
-  var champ3Formulaire1 = formulaire1.elements["champ3Formulaire1"].value;
-  var champ1Formulaire2 = formulaire2.elements["champ1Formulaire2"].value;
-  var champ2Formulaire2 = formulaire2.elements["champ2Formulaire2"].value;
-  var champ3Formulaire2 = formulaire2.elements["champ3Formulaire2"].value;
-  // Faire quelque chose avec les données récupérées
-  console.log("Champ 1 du formulaire 1 : " + champ1Formulaire1);
-  console.log("Champ 2 du formulaire 1 : " + champ2Formulaire1);
-  console.log("Champ 3 du formulaire 1 : " + champ3Formulaire1);
-  console.log("Champ 1 du formulaire 2 : " + champ1Formulaire2);
-  console.log("Champ 2 du formulaire 2 : " + champ2Formulaire2);
-  console.log("Champ 3 du formulaire 2 : " + champ3Formulaire2);
+
+function ajoutImage() {
+  const administrateur = sessionStorage.getItem('administrateur');
+  const administrateurObj = JSON.parse(administrateur);
+  const token = administrateurObj.token;
+  const userId = administrateurObj.userId;
+
+  let formulaire = document.getElementById("add-picture");
+  let body = new FormData(formulaire);
+  document.querySelector('#validProjet').style.display="none";
+  fetch(`http://localhost:5678/api/works/`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'userId': `'${userId}'`,
+    },
+    body
+  })
+  .then(response => response.text()
+      // on peut gerer le résultat de status    
+   )
+   .then (alert)
+   .catch((error) => {
+      alert(error)
+    })
+    .finally (()=>document.querySelector('#validProjet').style.display="block");
 }
-recupererDonneesDeuxFormulaires("add-image", "add-content");*/
 
 
 $(document).ready(function(){
     lectureBase();
     lectureCat();
- 
-   })
-
-
-
-
-
+})
